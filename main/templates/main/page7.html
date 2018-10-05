@@ -1,0 +1,35 @@
+{% extends 'main/global-ui/header.html' %}
+
+{% block content %}{% load static %}
+<div class="ui two column centered grid">
+    <div class="nine wide column">
+        <div class="ui inverted segment">
+            <form class="ui center aligned inverted form" method="POST">
+                {% csrf_token %}
+                <label for="" class="ui large blue label">5.</label>
+                <div class="ui inverted center aligned segment">
+                        <audio width="2000px;" controls="controls" src="{% static 'audio/' %}{{audio_7}}" cont></audio>
+                </div>
+                <div class="three column fields">
+                    <div class="field"></div>
+                    <div class="fourteen wide field">
+                        <label for="">Input Answer Here</label>
+                        {{form.college}}
+                    </div>
+                    <div class="field"></div>
+                  
+                </div>
+                <div class="ui inverted right aligned segment">
+                        <button id = "terms_btn" class = "ui button green" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'main/global-ui/header.html' %}
+
+{% block content %}
+<div class="ui two column centered grid">
+    <div class="nine wide column">
+        <div class="ui inverted segment">
+            <form class="ui center aligned inverted form" method="POST">
+                {% csrf_token %}
+                <div class="field">
+                    <label for="">1) Please select your dominant language.</label>
+                    {{form.first_language}}
+                </div>
+
+                <div class="field">
+                    <label for="">2) Please select your second language.</label>
+                    {{form.second_language}}
+                </div>
+                <div class="ui inverted right aligned segment">
+                        <button id = "terms_btn" class = "ui button green" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

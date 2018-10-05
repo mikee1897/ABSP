@@ -1,0 +1,60 @@
+{% extends 'main/global-ui/header.html' %}
+
+{% block content %}
+<div class="ui two column centered grid">
+    <div class="nine wide column">
+        <div class="ui inverted segment">
+            <form class="ui center aligned inverted form" method="POST">
+                {% csrf_token %}
+                <label for="">Press button to generate gain or losses</label>
+                <div class="four column fields" style="margin-top:20px;">
+                    <div class="field"></div>
+                    <div class="field">
+                        <label for="">Option A</label>
+                        <input id = "a_input" name = "a_input" type="number" readonly>
+                        <button id = "a_btn" class = "ui button orange" style="margin-top:10px;margin-left:20px;">A Button</button>
+                    </div>
+                    <div class="field">
+                        <label for="">Option B</label>
+                        <input id = "b_input" name = "b_input" type="number" readonly> 
+                        <button id = "b_btn" class = "ui button orange" style="margin-top:10px;margin-left:20px;">B Button</button>
+                    </div>
+                    <div class="field"></div>
+                </div>
+                <div class="ui inverted right aligned segment">
+                        <button id = "terms_btn" class = "ui button green" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $( document ).ready(function() {
+
+        var a_max=500;
+        var a_min=-200;
+        var a_res = Math.floor(Math.random() * (a_max + 1) + a_min);
+
+        $( "#a_btn" ).click(function() {
+            $('#a_input').val(a_res);
+            $('#a_btn').prop('disabled', true);
+        });
+
+        var b_max=200;
+        var b_min=-50;
+        var b_res = Math.floor(Math.random() * (b_max + 1) + b_min);
+
+        $( "#b_btn" ).click(function() {
+            $('#b_input').val(b_res);
+            $('#b_btn').prop('disabled', true);
+        });
+
+
+
+        // alert($('#A_amount').val());
+
+    });
+</script>
+{% endblock %}

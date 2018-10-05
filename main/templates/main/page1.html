@@ -1,0 +1,43 @@
+{% extends 'main/global-ui/header.html' %}
+
+{% block content %}
+<div class="ui two column centered grid">
+    <div class="nine wide column">
+        <div class="ui inverted segment">
+            <form class="ui center aligned inverted form" method="POST">
+                {% csrf_token %}
+                <div class="inline field">
+                    <div class="ui checkbox">
+                        {{form.bilingual}}
+                        <label>This is to confirm that I am a bilingual or that I speak at least two different languages.</label>
+                    </div>
+                </div>
+
+                <div class="inline field">
+                    <div class="ui checkbox">
+                        {{form.data}}
+                        <label>This is to confirm I allow the researcher to use the following data for research purposes.</label>
+                    </div>
+                </div>
+
+                <div class="inline field">
+                    <div class="ui checkbox">
+                        {{form.authentic}}
+                        <label>I pledge that all information I will provide during the experiment are authentic and real.</label>
+                    </div>
+                </div>
+
+                <div class="ui inverted right aligned segment">
+                        <button id = "terms_btn" class = "ui button green" type="submit">Proceed</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'main/global-ui/header.html' %}
+
+{% block content %}
+<div class="ui two column centered grid">
+    <div class="nine wide column">
+        <div class="ui inverted segment" style="margin-top:50px;">
+            <form class="ui center aligned inverted form" method="POST">
+                {% csrf_token %}
+                <div class="three column fields" style="margin-top:20px;">
+                    <div class="field"></div>
+                    <div class="sixteen wide field">
+                       <label style="font-size:20px;"> You now have a total of {{data.total_coins}} coins!</label>
+                    </div>
+                    <div class="field"></div>
+                </div>
+                <div class="ui inverted right aligned segment">
+                        <button id = "terms_btn" class = "ui button green" type="submit">Proceed</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

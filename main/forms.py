@@ -9,68 +9,78 @@ from main.models import Participant
 class DateInput(forms.DateInput):
     input_type = 'date'
 
-class ParticipantForm(ModelForm):
+class TermsForm(forms.ModelForm):
+    
+    class Meta:
+        model = Participant
+        fields = ('bilingual', 'data', 'authentic')
+
+    bilingual = forms.BooleanField(widget = forms.CheckboxInput())
+    data = forms.BooleanField(widget = forms.CheckboxInput())
+    authentic = forms.BooleanField(widget = forms.CheckboxInput())
+
+class LanguageForm(forms.ModelForm):
     LANGUAGE = (
-        ('Filipino', 'Filipino'),
         ('English', 'English'),
-        ('Hokkien', 'Hokkien'),
-        ('Mandarin', 'Mandarin'),
+        ('Tagalog', 'Tagalog'),
         ('Korean', 'Korean'),
         ('Japanese', 'Japanese'),
-        ('Bisaya/Cebuano', 'Bisaya/Cebuano'),
-    )
-
-    COLLEGE = (
-        ('BAGCED', 'BAGCED'),
-        ('CCS', 'CCS'),
-        ('COL', 'COL'),
-        ('CLA', 'CLA'),
-        ('COS', 'COS'),
-        ('GCOE', 'GCOE'),
-        ('RVRCOB', 'RVRCOB'),
-        ('SOE', 'SOE'),
+        ('Mandarin', 'Mandarin'),
+        ('Hokkien', 'Hokkien'),
+        ('Cebuano', 'Cebuano'),
     )
 
     class Meta:
         model = Participant
-        fields = ('idnumber', 'last_name', 'first_name', 'email', 'birthday', 'college', 'degree', 'mobile', 'language1', 'language2' )
+        fields = ('first_language', 'second_language')
 
-        widgets = {
-            'idnumber': forms.NumberInput(attrs={'class': 'form-control', 'placeholder' : 'xxxxxxxxx', 'maxlength':8}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder' : 'Last Name'}),
-            'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder' : 'First Name'}),
-            'mobile': forms.NumberInput(attrs={'class': 'form-control', 'placeholder' : '09xxxxxxx'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder' : 'Email'}),
-            'birthday': DateInput(attrs={'class': 'form-control', 'placeholder' : 'Birthday'}),
-            'college': forms.Select(attrs={'class': 'form-control'}),
-            'degree': forms.TextInput(attrs={'class': 'form-control', 'placeholder' : 'Degree'}),
-            'language1': forms.Select(attrs={'class': 'form-control'}),
-            'language2': forms.Select(attrs={'class': 'form-control'})
-        }
-        
-class Question1Form(ModelForm):
+    first_language = forms.CharField(widget = forms.Select(choices=LANGUAGE))
+    second_language = forms.CharField(widget = forms.Select(choices=LANGUAGE))
+
+class NameForm(forms.ModelForm):
     class Meta:
         model = Participant
-        fields = ('question1',)
+        fields = ('name',)
 
-        CHOICES = (
-            ('A', 'A'),
-            ('B', 'B'), 
-        )
-
-        widgets = {
-            'question1': forms.Select(choices= CHOICES, attrs={'class': 'form-control'})
-        }
-
-class Question2Form(ModelForm):
+class IDForm(forms.ModelForm):
     class Meta:
         model = Participant
-        fields = ('question2',)
+        fields = ('idnumber',)
+
+class AgeForm(forms.ModelForm):
+    class Meta:
+        model = Participant
+        fields = ('age',)
+    
+class GenderForm(forms.ModelForm):
+    class Meta:
+        model = Participant
+        fields = ('gender',)
+
+class CollegeForm(forms.ModelForm):
+    class Meta:
+        model = Participant
+        fields = ('college',)
+
+class EmailForm(forms.ModelForm):
+    class Meta:
+        model = Participant
+        fields = ('email',)
+   
+class MobileForm(forms.ModelForm):
+    class Meta:
+        model = Participant
+        fields = ('mobile',)
 
         widgets = {
-            'question2': forms.NumberInput(attrs={'class': 'form-control', 'maxlength':3})
+            'mobile': forms.TextInput(attrs={'placeholder':'09xxxxxxxxx'})
         }
-
-        def __init__(self, *args, **kwargs):
-            super(MyForm, self).__init__(*args, **kwargs)   
-            self.fields["question2"].initial = Participant.objects.latest('id').question2
+   
+class InvestAmountForm(forms.ModelForm):
+    class Meta:
+        model = Participant
+        fields = ('A_amount', 'B_amount')
+        widgets = {
+            'A_amount': forms.NumberInput(attrs={'name':'A_amount', 'id':'A_amount', 'max': '1000', 'maxlength': '5'}),
+            'B_amount': forms.NumberInput(attrs={'name':'B_amount', 'id':'B_amount', 'readonly':'readonly'})
+        }

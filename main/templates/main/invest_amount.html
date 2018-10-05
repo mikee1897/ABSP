@@ -1,0 +1,46 @@
+{% extends 'main/global-ui/header.html' %}
+
+{% block content %}
+<div class="ui two column centered grid">
+    <div class="nine wide column">
+        <div class="ui inverted segment">
+            <form class="ui center aligned inverted form" method="POST">
+                {% csrf_token %}
+                <label for="">How much are you willing to invest?</label>
+                <small>1000 and below only</small>
+                <div class="four column fields" style="margin-top:20px;">
+                    <div class="field"></div>
+                    <div class="field">
+                        <label for="">A</label>
+                        {{form.A_amount}}
+                    </div>
+                    <div class="field">
+                        <label for="">B</label>
+                        {{form.B_amount}}
+                    </div>
+                    <div class="field"></div>
+                </div>
+                <div class="ui inverted right aligned segment">
+                        <button id = "terms_btn" class = "ui button green" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $( document ).ready(function() {
+
+        $("#A_amount").on("change paste keyup", function() {
+            var res = 1000 - $(this).val()
+
+            $('#B_amount').val(res);
+           
+        });
+
+        // alert($('#A_amount').val());
+
+    });
+</script>
+{% endblock %}

@@ -4,101 +4,51 @@
     <head>
         <title>THSECO2</title>
         <link rel="icon" type="image/gif/png/jpg" href="{% static 'images/icon.png' %}">
-        <!--Bootswatch css-->
-        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/custom_style.css' %}">
-       
-      <!--Bootswatch js-->
-      <script src="{% static '_vendor/jquery/dist/jquery.min.js' %}"></script>
-      <script src="{% static '_vendor/popper.js/dist/umd/popper.min.js' %}"></script>
-      <script src="{% static '_vendor/bootstrap/dist/js/bootstrap.min.js' %}"></script>
-      <script src="{% static '_assets/js/custom.js' %}"></script>
-  
+
+        <link rel="stylesheet" href="{% static 'semantic/semantic.min.css' %}">
+
+        <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+        <script src="{% static 'semantic/semantic.min.js' %}"></script>
     </head>
     <body>
     <!--Start of Navbar-->
-    <nav class="navbar navbar-expand-lg stick-top navbar-dark bg-primary">
-      <div class="container">
-        <!--Logo/Brand-->
-        <a href="{% url 'main:home'%}" class="navbar-brand">
-            <img src="{% static 'images/logo_t.png' %}" alt="" width="80px;" length="80px;">
+    <div class="ui inverted pointing menu">
+        <a class="item" href="{% url 'main:page1'%}">
+          THSECO2
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav">
-             <!--Nav Contents-->
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'main:home'%}">Home</a>
-            </li>
-          </ul>
-        </div>
+    </div>
+      <!--End of Navbar-->
+      <div class="ui center aligned container" style="margin-top:80px;">
+          {% block content %}
+          {% endblock %}
       </div>
-    </nav>
-    <!--End of Navbar-->
-    {% block content %}
-    {% endblock %}
 
   </body>
 
-  <style>
-
-      audio {
-        width: 500px;
-        display: block;
-        margin:auto;
-      }
-      
-      .btn-primary{
-        width:100px;
-      }
-
-      .row{
-        margin-top:20px;
-      }
-      .form-group{
-        margin-top:20px;
-      }
-      .input{
-        width:300px;
-        margin-top:20px;
-      }
-      
-      label{
-        font-size:20px;
-      }
-
-      .proceed{
-        width:200px;
-      }
-      #next{
-        width: 100px;
-        float:right;
-      }
-      #back{
-        width: 100px;
-        float:left;
-      }
-      .form-check-input{
-        background:orange;
-      }
-  </style>
-
   <script>
-    $( document ).ready(function() {
-         console.log( 'ready!' );
-        
-         $('#datetimepicker3').datetimepicker({
-             format: 'LT'
-         });
+      $( document ).ready(function() {
+        $('.ui.menu .item').on('click', function() {   
+        $(this)
+        .addClass('active')
+        .siblings()
+        .removeClass('active'); 
+      })
 
-         $(function () {
-             $('#datetimepicker1').datetimepicker();
-         });
-     });
+      $('.ui.checkbox').checkbox();
 
-     
- </script>
+      $("input[type='checkbox'].hidden").change(function(){
+        var a = $("input[type='checkbox'].hidden");
+        if(a.length == a.filter(":checked").length){
+          $('input[type="submit"]').removeAttr('disabled');
+        }
+      });
+
+      $('.ui.dropdown').dropdown();
+
+    });
+  </script>
+
+  {% block script %}
+  {% endblock %}
 
 </html>
