@@ -5,6 +5,7 @@ from django.forms import formset_factory, inlineformset_factory
 from django.db.models import aggregates
 from django.contrib import messages
 import random
+from decimal import Decimal
 
 from main.models import Participant
 from main.forms import TermsForm, LanguageForm, NameForm, IDForm, AgeForm, GenderForm, CollegeForm
@@ -61,25 +62,6 @@ def page2(request):
         'form': form,
     }
     return render(request, 'main/page2.html', context)
-
-# def choose_language(request):
-#     data = Participant.objects.latest('id')
-#     context = {
-#         'data': data,
-#     }
-#     return render(request, 'main/choose_language.html', context)
-
-# def first_language(request):
-#     data = Participant.objects.latest('id')
-#     data.language_used = data.first_language
-#     data.save()
-#     return HttpResponseRedirect('../page3')
-
-# def second_language(request):
-#     data = Participant.objects.latest('id')
-#     data.language_used = data.second_language
-#     data.save()
-#     return HttpResponseRedirect('../page3')
 
 def page3(request):
     data = Participant.objects.latest('id')
@@ -313,7 +295,6 @@ def page10(request):
     audio_10_6 = ""
     audio_10_7 = ""
     audio_10_8 = ""
-    audio_10_9 = ""
     # if data.language_used == "English":
        
     # elif data.language_used == "Tagalog":
@@ -369,10 +350,30 @@ def page10(request):
 def withdraw(request):
     data = Participant.objects.latest('id')
     data.withdraw_invest = "WITHDRAW"
+    audio_10_9 = ""
     #TODO
     #payout 
+
+     # if data.language_used == "English":
+       
+    # elif data.language_used == "Tagalog":
+       
+    # elif data.language_used == "Korean":
+       
+    # elif data.language_used == "Japanese":
+       
+    if data.language_used == "Mandarin":
+        audio_10_9 = "MND/MND10.9.m4a"
+    elif data.language_used == "Hokkien":
+        audio_10_9 = "HOK/HOK10.9.m4a"
+    else:
+        audio_10_9 = "CEB/CEB10.9.m4a"
+
+    context = {
+        'audio_10_9': audio_10_9,
+    }
     data.save()
-    return render(request, 'main/page13.html')
+    return render(request, 'main/page13.html', context)
 
 def invest(request):
     data = Participant.objects.latest('id')
@@ -398,6 +399,15 @@ def page11(request):
         data.save()
         return HttpResponseRedirect('../page12')
     return render(request, 'main/page11.html')
+
+#TODO
+#PAGE11 RESULT OF TABLE
+def tableresult(request, id):
+	data = Participant.objects.latest('id')
+	context = {
+		'data': data,
+	}
+	return render(request, 'main/page11.html', context)
 
 def page12(request):
     data = Participant.objects.latest('id')
@@ -431,3 +441,4 @@ def page13(request):
         'closing_line' : closing_line
     }
     return render(request, 'main/page13.html', context)
+

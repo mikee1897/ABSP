@@ -81,6 +81,6 @@ class InvestAmountForm(forms.ModelForm):
         model = Participant
         fields = ('A_amount', 'B_amount')
         widgets = {
-            'A_amount': forms.NumberInput(attrs={'name':'A_amount', 'id':'A_amount', 'max': '1000', 'maxlength': '5'}),
-            'B_amount': forms.NumberInput(attrs={'name':'B_amount', 'id':'B_amount', 'readonly':'readonly'})
+            'A_amount': forms.NumberInput(attrs={'name':'A_amount', 'id':'A_amount', 'max': '1000', 'maxlength': '5', 'type':'number'}),
+            'B_amount': forms.NumberInput(attrs={'name':'B_amount', 'id':'B_amount', 'readonly':'readonly', 'type':'number'})
         }

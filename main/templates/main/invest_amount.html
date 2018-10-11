@@ -1,13 +1,15 @@
 {% extends 'main/global-ui/header.html' %}
 
-{% block content %}
+{% block content %}{% load static %}
 <div class="ui two column centered grid">
     <div class="nine wide column">
         <div class="ui inverted segment">
             <form class="ui center aligned inverted form" method="POST">
                 {% csrf_token %}
-                <label for="">How much are you willing to invest?</label>
                 <small>1000 and below only</small>
+                <div class="ui inverted center aligned segment">
+                        <audio width="2000px;" controls="controls" src="{% static 'audio/' %}{{audio_10_9}}" cont></audio>
+                </div>
                 <div class="four column fields" style="margin-top:20px;">
                     <div class="field"></div>
                     <div class="field">
@@ -21,7 +23,9 @@
                     <div class="field"></div>
                 </div>
                 <div class="ui inverted right aligned segment">
-                        <button id = "terms_btn" class = "ui button green" type="submit">Submit</button>
+                        <button id = "terms_btn" class = "ui icon button green" type="submit">
+                            <i class="angle double right icon"></i>
+                        </button>
                 </div>
             </form>
         </div>
