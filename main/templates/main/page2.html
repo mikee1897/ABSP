@@ -7,12 +7,14 @@
             <form class="ui center aligned inverted form" method="POST">
                 {% csrf_token %}
                 <div class="field">
-                    <label for="">1) Please select your dominant language.</label>
+                    <label for="">Please select the language spoken at home (the language you're 
+                        most comfortable with.).</label>
                     {{form.first_language}}
                 </div>
 
                 <div class="field">
-                    <label for="">2) Please select your second language.</label>
+                    <label for="">Please select the  language you fluently use aside from the language
+                        you speak at home (you secondary language).</label>
                     {{form.second_language}}
                 </div>
                 <div class="ui inverted right aligned segment">

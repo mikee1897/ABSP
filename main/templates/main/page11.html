@@ -1,6 +1,14 @@
 {% extends 'main/global-ui/header.html' %}
 
 {% block content %}
+{% if messages %}
+    {% for message in messages %}
+    <div class="ui basic segment">
+        <div class="ui red message"> {{ message }}</div>
+    </div>    
+    {% endfor %}
+{% endif %}
+
 <div class="ui two column centered grid">
     <div class="nine wide column">
         <div class="ui inverted segment">
@@ -9,134 +17,51 @@
                 <div class="four column fields" style="margin-top:20px;">
                     <div class="field"></div>
                     <div class="field">
-                        <label for="">Option A</label>
-                        <input id = "a_input" name = "a_input" type="number" readonly>
+                        <label for="">A</label>
+                        {{form.A_gain_loss}}
                         <button id = "a_btn" class = "ui button orange" style="margin-top:10px;">Generate Gain/(Loss)</button>
                     </div>
                     <div class="field">
-                        <label for="">Option B</label>
-                        <input id = "b_input" name = "b_input" type="number" readonly> 
+                        <label for="">B</label>
+                        {{form.B_gain_loss}}
                         <button id = "b_btn" class = "ui button orange" style="margin-top:10px;">Generate Gain/(Loss)</button>
                     </div>
                     <div class="field"></div>
                 </div>
                 <div class="ui inverted right aligned segment">
-                        <div class="ui buttons">
-                                <a class="ui button" href="">Result</a>
-                                <div class="or"></div>
-                                <button id = "terms_btn"  class="ui icon button green" type="submit">
-                                        <i class="angle double right icon"></i>
-                                </button>
-                        </div>
+                    <div class="ui buttons">
+                        <a class="ui icon button" href="{% url 'main:page11'%}">
+                            <i class="angle double left icon"></i>
+                        </a>
+                        <div class="or"></div>
+                        <button id = "terms_btn"  class="ui icon button green" type="submit">
+                                <i class="angle double right icon"></i>
+                        </button>
+                    </div>
                 </div>
-
             </form>
         </div>
     </div>
-
-    <div class="ten wide column "> 
-        <div class = "ui segment">
-            <table class="ui compact celled definition table">
-                <thead>
-                        <tr>
-                            <th>LOWEST POSSIBLE</th>
-                            <th>RISKY (A)</th>
-                            <th>KESS-RISKY (B</th>
-                            <th>TOTAL</th>
-                        </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Investment</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Gain/(Loss)</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>TOTAL END COINS</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                </tbody>
-            </table>
-
-            <div class="ui divider"></div>
-
-            <table class="ui compact celled definition table">
-                <thead>
-                    <tr>
-                        <th>HIGHEST POSSIBLE</th>
-                        <th>RISKY (A)</th>
-                        <th>KESS-RISKY (B</th>
-                        <th>TOTAL</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Investment</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Gain/(Loss)</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>TOTAL END COINS</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
 <script>
     $( document ).ready(function() {
-
-        var a_max=96.90;
-        var a_min=-49.90;
-        var a_res = Math.floor(Math.random() * (a_max + 1) + a_min).toFixed(2);
-
         $( "#a_btn" ).click(function() {
-            $('#a_input').val(a_res);
+            $('#A_gain_loss').val("{{a_output}}");
             $('#a_btn').prop('disabled', true);
         });
 
-        var b_max=13.00;
-        var b_min=-7.00;
-        var b_res = Math.floor(Math.random() * (b_max + 1) + b_min).toFixed(2);
-
         $( "#b_btn" ).click(function() {
-            $('#b_input').val(b_res);
+            $('#B_gain_loss').val("{{b_output}}");
             $('#b_btn').prop('disabled', true);
         });
 
-       
         $(function(){
             if($('#a_btn').prop('disabled') == true) { 
                 alert('disabled'); 
             } 
-         
+            // if($('#A_gain_loss').is(":empty")){
+            //     alert("empty")
+            // }
         });
-
-
-        // alert($('#A_amount').val());
-
     });
 </script>
 {% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'main/global-ui/header.html' %}
+
+{% block content %}
+<div class="ui two column centered grid">
+    <div class="ten wide column " style="margin-bottom:20px;"> 
+        <div class = "ui segment">
+            <table class="ui right aligned compact celled definition table">
+                <thead>
+                        <tr>
+                            <th>LOWEST POSSIBLE</th>
+                            <th>RISKY (A)</th>
+                            <th>LESS-RISKY (B)</th>
+                            <th>TOTAL</th>
+                        </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Investment</td>
+                        <td>{{data.A_amount}}</td>
+                        <td>{{data.B_amount}}</td>
+                        <td>{{data.investment}}</td>
+                    </tr>
+                    <tr>
+                        <td>Gain/(Loss)</td>
+                        <td>{{lgla_output}}</td>
+                        <td>{{lglb_output}}</td>
+                        <td>{{lgl_total}}</td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL END COINS</td>
+                        <td>{{lgla_total}}</td>
+                        <td>{{lglb_total}}</td>
+                        <td>{{lgl_end_total}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <div class="ui divider"></div>
+
+            <table class="ui right aligned compact celled definition table">
+                <thead>
+                    <tr>
+                        <th>HIGHEST POSSIBLE</th>
+                        <th>RISKY (A)</th>
+                        <th>LESS-RISKY (B)</th>
+                        <th>TOTAL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Investment</td>
+                        <td>{{data.A_amount}}</td>
+                        <td>{{data.B_amount}}</td>
+                        <td>{{data.investment}}</td>
+                    </tr>
+                    <tr>
+                        <td>Gain/(Loss)</td>
+                        <td>{{hgla_output}}</td>
+                        <td>{{hglb_output}}</td>
+                        <td>{{hgl_total}}</td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL END COINS</td>
+                        <td>{{hgla_total}}</td>
+                        <td>{{hglb_total}}</td>
+                        <td>{{hgl_end_total}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>
+
+<div class="ui two column centered grid">
+    <div class="ten wide column " >
+        <div class="ui right aligned basic segment">
+                <a class="ui icon button" href="{% url 'main:invest'%}">
+                    <i class="angle double left icon"></i>
+                </a>
+                <a class="ui icon green button" href="{% url 'main:page11'%}">
+                    <i class="angle double right icon"></i>
+                </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

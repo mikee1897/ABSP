@@ -13,11 +13,11 @@ class TermsForm(forms.ModelForm):
     
     class Meta:
         model = Participant
-        fields = ('bilingual', 'data', 'authentic')
+        fields = ('speak', 'unidentifiable', 'imaginary')
 
-    bilingual = forms.BooleanField(widget = forms.CheckboxInput())
-    data = forms.BooleanField(widget = forms.CheckboxInput())
-    authentic = forms.BooleanField(widget = forms.CheckboxInput())
+    speak = forms.BooleanField(widget = forms.CheckboxInput())
+    unidentifiable = forms.BooleanField(widget = forms.CheckboxInput())
+    imaginary = forms.BooleanField(widget = forms.CheckboxInput())
 
 class LanguageForm(forms.ModelForm):
     LANGUAGE = (
@@ -46,6 +46,9 @@ class IDForm(forms.ModelForm):
     class Meta:
         model = Participant
         fields = ('idnumber',)
+        widgets = {
+            'idnumber': forms.NumberInput(attrs={'name':'idnumber', 'id':'idnumber','type':'number'})
+        }
 
 class AgeForm(forms.ModelForm):
     class Meta:
@@ -72,10 +75,6 @@ class MobileForm(forms.ModelForm):
         model = Participant
         fields = ('mobile',)
 
-        widgets = {
-            'mobile': forms.TextInput(attrs={'placeholder':'09xxxxxxxxx'})
-        }
-   
 class InvestAmountForm(forms.ModelForm):
     class Meta:
         model = Participant
@@ -83,4 +82,14 @@ class InvestAmountForm(forms.ModelForm):
         widgets = {
             'A_amount': forms.NumberInput(attrs={'name':'A_amount', 'id':'A_amount', 'max': '1000', 'maxlength': '5', 'type':'number'}),
             'B_amount': forms.NumberInput(attrs={'name':'B_amount', 'id':'B_amount', 'readonly':'readonly', 'type':'number'})
+        }
+        
+
+class OutcomeForm(forms.ModelForm):
+    class Meta:
+        model = Participant
+        fields = ('A_gain_loss', 'B_gain_loss')
+        widgets = {
+            'A_gain_loss': forms.NumberInput(attrs={'name':'A_gain_loss', 'id':'A_gain_loss', 'readonly':'readonly', 'type':'number'}),
+            'B_gain_loss': forms.NumberInput(attrs={'name':'B_gain_loss', 'id':'B_gain_loss', 'readonly':'readonly', 'type':'number'})
         }

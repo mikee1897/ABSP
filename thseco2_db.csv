@@ -1,0 +1,6 @@
+id,first_language,second_language,language_used,quadrant,treatment,name,idnumber,age,gender,college,email,mobile,withdraw_invest,investment,A_amount,B_amount,A_generated_percent,B_generated_percent,A_gain_loss,B_gain_loss,ecu,payout
+1,Tagalog,English,Tagalog,SS,1,Person1 Lastname,11223344,18,M,COL,client@yahoo.com,9178912345,1,1000,NULL,NULL,0,0,0,0,1000,130
+2,Korean,Japanese,Japanese,SW,2,Person2 Lastname,11442233,19,M,CCS,client@yahoo.com,9178912345,1,1000,NULL,NULL,0,0,0,0,1000,130
+3,Cebuano,Mandarin,Mandarin,WW,2,Person3 Lastname,11552244,20,F,CLA,client@yahoo.com,9178912345,2,1000,120,880,6.64,0.92,7.97,8.1,1016.07,131.12
+4,Hokkien,Mandarin,Hokkien,WW,1,Person4 Lastname,11223322,21,F,RVRCOB,client@yahoo.com,9178912345,2,1000,13,987,-15.42,-1.2,-2,-11.84,986.16,129.03
+5,Cebuano,Japanese,Japanese,WW,2,Person5 Lastname,11552233,22,F,BAGCED,client@yahoo.com,9178912345,1,1000,NULL,NULL,0,0,0,0,1000,130

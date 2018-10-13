@@ -1,12 +1,25 @@
 {% extends 'main/global-ui/header.html' %}
 
 {% block content %}{% load static %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="ui basic segment">
+            <div class="{{ style }}"> {{ message }}</div>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
 <div class="ui two column centered grid">
     <div class="nine wide column">
         <div class="ui inverted segment">
             <form class="ui center aligned inverted form" method="POST">
                 {% csrf_token %}
-                <small>1000 and below only</small>
+
+                <div class="ui big blue label">
+                    <i class="large money bill green alternate icon"></i>
+                    >= 1000
+                </div>
                 <div class="ui inverted center aligned segment">
                         <audio width="2000px;" controls="controls" src="{% static 'audio/' %}{{audio_10_9}}" cont></audio>
                 </div>
@@ -38,13 +51,15 @@
 
         $("#A_amount").on("change paste keyup", function() {
             var res = 1000 - $(this).val()
-
             $('#B_amount').val(res);
-           
+            
+            if ($(this).val() > 1000){
+                alert("Amount >= 1000");
+                $(this).val('0');
+                $('#B_amount').val(0);
+            }
+
         });
-
-        // alert($('#A_amount').val());
-
     });
 </script>
 {% endblock %}

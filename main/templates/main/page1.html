@@ -2,28 +2,33 @@
 
 {% block content %}
 <div class="ui two column centered grid">
-    <div class="nine wide column">
+    <div class="ten wide column">
         <div class="ui inverted segment">
             <form class="ui center aligned inverted form" method="POST">
                 {% csrf_token %}
+                <table class="ui basic inverted table">
                 <div class="inline field">
                     <div class="ui checkbox">
-                        {{form.bilingual}}
-                        <label>This is to confirm that I am a bilingual or that I speak at least two different languages.</label>
+                        {{form.speak}}
+                        <label style="font-size:14px;">This is to confirm that I speak more than one language.</label>
                     </div>
                 </div>
 
                 <div class="inline field">
                     <div class="ui checkbox">
-                        {{form.data}}
-                        <label>This is to confirm I allow the researcher to use the following data for research purposes.</label>
+                        {{form.unidentifiable}}
+                        <label style="font-size:14px;">This is to confirm that I allow the researchers to use the following 
+                            data only for reasearch purposes. Furthermore, I am aware that my individual
+                            information is confidential - it cannot be tagged in this experiment and I will
+                            not be personally or individually identifiable.</label>
                     </div>
                 </div>
 
                 <div class="inline field">
                     <div class="ui checkbox">
-                        {{form.authentic}}
-                        <label>I pledge that all information I will provide during the experiment are authentic and real.</label>
+                        {{form.imaginary}}
+                        <label style="font-size:14px;">I understand that this experiment uses the Experimental Currency Unit (ECU), which is
+                            imaginary, and is not directly equivalent to any currency in existence.</label>
                     </div>
                 </div>
 

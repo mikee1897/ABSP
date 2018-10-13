@@ -30,8 +30,15 @@
 
 </div>
 
-{% endblock %}
+<script>
+    $( document ).ready(function() {
 
-{% block script %}
+         $("#idnumber").on("change paste keyup", function() {
+           if($(this).val().length > 8){
+               alert("Invalid ID Number")
+           }
+        });
+    });
+</script>
 
 {% endblock %}

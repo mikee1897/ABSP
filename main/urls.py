@@ -21,6 +21,7 @@ urlpatterns = [
     path('page10/', views.page10, name='page10'),
     path('withdraw/', views.withdraw, name='withdraw'),
     path('invest/', views.invest, name='invest'),
+    path('table-data/', views.table_data, name='table_data'),
     path('page11/', views.page11, name='page11'),
     path('page12/', views.page12, name='page12'),
     path('page13/', views.page13, name='page13'),   

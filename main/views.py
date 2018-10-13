@@ -9,7 +9,7 @@ from decimal import Decimal
 
 from main.models import Participant
 from main.forms import TermsForm, LanguageForm, NameForm, IDForm, AgeForm, GenderForm, CollegeForm
-from main.forms import EmailForm, MobileForm, InvestAmountForm
+from main.forms import EmailForm, MobileForm, InvestAmountForm, OutcomeForm
 # Create your views here.
 
 
@@ -35,6 +35,12 @@ def page2(request):
             language = [data.first_language, data.second_language]
             res = random.choices(language)
             data.language_used = res[0]
+            #treatment data
+            if data.language_used == data.first_language:
+                data.treatment = 1
+            else:
+                data.treatment = 2
+
             #quandrant identification
             if data.first_language == "English":
                 quad = "S"
@@ -56,6 +62,7 @@ def page2(request):
 
             data.quadrant = quad
             data.save()
+
             return HttpResponseRedirect('../page3')
            
     context = {
@@ -65,7 +72,7 @@ def page2(request):
 
 def page3(request):
     data = Participant.objects.latest('id')
-    form = NameForm(request.POST)
+    form = NameForm(request.POST or None)
     audio_3 = ""
     # if data.language_used == "English":
        
@@ -81,13 +88,15 @@ def page3(request):
         audio_3 = "HOK/HOK3.m4a"
     else:
         audio_3 = "CEB/CEB3.m4a"
-    
+
     if request.method == 'POST':
         if form.is_valid():
+            print("vaid")
             data.name = request.POST.get('name')
             data.save()
             return HttpResponseRedirect('../page4')
-           
+        else:
+            print("not valid")
     context = {
         'form': form,
         'audio_3': audio_3 
@@ -289,12 +298,6 @@ def page10(request):
     data = Participant.objects.latest('id')
     audio_10_1 = ""
     audio_10_2 = ""
-    audio_10_3 = ""
-    audio_10_4 = ""
-    audio_10_5 = ""
-    audio_10_6 = ""
-    audio_10_7 = ""
-    audio_10_8 = ""
     # if data.language_used == "English":
        
     # elif data.language_used == "Tagalog":
@@ -306,86 +309,43 @@ def page10(request):
     if data.language_used == "Mandarin":
         audio_10_1 = "MND/MND10.1.m4a"
         audio_10_2 = "MND/MND10.2.m4a"
-        audio_10_3 = "MND/MND10.3.m4a"
-        audio_10_4 = "MND/MND10.4.m4a"
-        audio_10_5 = "MND/MND10.5.m4a"
-        audio_10_6 = "MND/MND10.6.m4a"
-        audio_10_7 = "MND/MND10.7.m4a"
-        audio_10_8 = "MND/MND10.8.m4a"
-        audio_10_9 = "MND/MND10.9.m4a"
+       
     elif data.language_used == "Hokkien":
         audio_10_1 = "HOK/HOK10.1.m4a"
         audio_10_2 = "HOK/HOK10.2.m4a"
-        audio_10_3 = "HOK/HOK10.3.m4a"
-        audio_10_4 = "HOK/HOK10.4.m4a"
-        audio_10_5 = "HOK/HOK10.5.m4a"
-        audio_10_6 = "HOK/HOK10.6.m4a"
-        audio_10_7 = "HOK/HOK10.7.m4a"
-        audio_10_8 = "HOK/HOK10.8.m4a"
-        audio_10_9 = "HOK/HOK10.9.m4a"
+      
     else:
         audio_10_1 = "CEB/CEB10.1.m4a"
         audio_10_2 = "CEB/CEB10.2.m4a"
-        audio_10_3 = "CEB/CEB10.3.m4a"
-        audio_10_4 = "CEB/CEB10.4.m4a"
-        audio_10_5 = "CEB/CEB10.5.m4a"
-        audio_10_6 = "CEB/CEB10.6.m4a"
-        audio_10_7 = "CEB/CEB10.7.m4a"
-        audio_10_8 = "CEB/CEB10.8.m4a"
-        audio_10_9 = "CEB/CEB10.9.m4a"
-    
+       
     context = {
         'audio_10_1': audio_10_1,
         'audio_10_2': audio_10_2,
-        'audio_10_3': audio_10_3,
-        'audio_10_4': audio_10_4,
-        'audio_10_5': audio_10_5,
-        'audio_10_6': audio_10_6,
-        'audio_10_7': audio_10_7,
-        'audio_10_8': audio_10_8,
-        'audio_10_9': audio_10_9,
     }
     return render(request, 'main/page10.html', context)
 
 def withdraw(request):
     data = Participant.objects.latest('id')
-    data.withdraw_invest = "WITHDRAW"
-    audio_10_9 = ""
-    #TODO
-    #payout 
-
-     # if data.language_used == "English":
-       
-    # elif data.language_used == "Tagalog":
-       
-    # elif data.language_used == "Korean":
-       
-    # elif data.language_used == "Japanese":
-       
-    if data.language_used == "Mandarin":
-        audio_10_9 = "MND/MND10.9.m4a"
-    elif data.language_used == "Hokkien":
-        audio_10_9 = "HOK/HOK10.9.m4a"
-    else:
-        audio_10_9 = "CEB/CEB10.9.m4a"
-
+    data.withdraw_invest = 1
     context = {
-        'audio_10_9': audio_10_9,
     }
     data.save()
     return render(request, 'main/page13.html', context)
 
 def invest(request):
     data = Participant.objects.latest('id')
+    data.withdraw_invest = 2
     form = InvestAmountForm(request.POST)
     if request.method == 'POST':
         if form.is_valid():
-            data.withdraw_invest = "INVEST"
-            data.A_amount = request.POST.get('A_amount')
-            data.B_amount = request.POST.get('B_amount')
+            data.withdraw_invest = 2
+            data.A_generated_percent = request.POST.get('percent_A')
+            data.B_generated_percent = request.POST.get('percent_B')
+            data.A_amount =  request.POST.get('A_amount')
+            data.B_amount =  request.POST.get('B_amount')
             data.save()
-            return HttpResponseRedirect('../page11')
-           
+            return HttpResponseRedirect('../table-data')
+
     context = {
         'form': form,
     }
@@ -393,21 +353,117 @@ def invest(request):
 
 def page11(request):
     data = Participant.objects.latest('id')
-    if request.method == 'POST':
-        data.A_gain_loss = request.POST.get('a_input')
-        data.B_gain_loss = request.POST.get('b_input')
-        data.save()
-        return HttpResponseRedirect('../page12')
-    return render(request, 'main/page11.html')
+    form = OutcomeForm(request.POST or None)
+    # TABLE OUTPUT LOWEST POSSIBLE
+    lgla = data.A_amount * Decimal(-49.90/100)
+    lglb = data.B_amount * Decimal(-7.00/100)
+    lgla_output = round(lgla,2)
+    lglb_output = round(lglb,2)
+    lgl_total = lgla_output + lglb_output
+    lgla_total = data.A_amount + lgla_output
+    lglb_total = data.B_amount + lglb_output
+    lgl_end_total = lgla_total + lglb_total 
 
-#TODO
-#PAGE11 RESULT OF TABLE
-def tableresult(request, id):
-	data = Participant.objects.latest('id')
-	context = {
+    #TABLE OUTPUT HIGHEST POSSIBLE
+    hgla = data.A_amount * Decimal(96.90/100)
+    hglb = data.B_amount * Decimal(13/100)
+    hgla_output = round(hgla,2)
+    hglb_output = round(hglb,2)
+    hgl_total = hgla_output + hglb_output
+    hgla_total = data.A_amount + hgla_output
+    hglb_total = data.B_amount + hglb_output
+    hgl_end_total = hgla_total + hglb_total 
+
+    #OUTCOME
+    percent_a = random.uniform(-49.90, 96.90)
+    percent_b = random.uniform(-7.00, 13)
+    percent_a_output = round(percent_a,2)
+    percent_b_output = round(percent_b,2)
+    aa_output = data.A_amount * Decimal(percent_a_output/100)
+    bb_output = data.B_amount * Decimal(percent_b_output/100)
+    a_output = round(aa_output,2)
+    b_output = round(bb_output,2)
+    
+    if request.method == 'POST':
+        if form.is_valid():
+            data.A_generated_percent = percent_a_output
+            data.B_generated_percent = percent_b_output
+            data.A_gain_loss = a_output
+            data.B_gain_loss = b_output
+            data.save()
+            return HttpResponseRedirect('../page12')
+        else:
+            messages.warning(request, 'Click Buttons to Generate Gain/(Loss)')
+
+    context = {
 		'data': data,
+        'form': form,
+        'lgla_output':lgla_output,
+        'lglb_output':lglb_output,
+        'lgl_total':lgl_total,
+        'lgla_total':lgla_total,
+        'lglb_total':lglb_total,
+        'lgl_end_total':lgl_end_total,
+        'hgla_output':hgla_output,
+        'hglb_output':hglb_output,
+        'hgl_total':hgl_total,
+        'hgla_total':hgla_total,
+        'hglb_total':hglb_total,
+        'hgl_end_total':hgl_end_total,
+        'a_output': a_output,
+        'b_output': b_output,
 	}
-	return render(request, 'main/page11.html', context)
+    return render(request, 'main/page11.html', context)
+
+
+def table_data(request):
+    data = Participant.objects.latest('id')
+    # TABLE OUTPUT LOWEST POSSIBLE
+    lgla = data.A_amount * Decimal(-49.90/100)
+    lglb = data.B_amount * Decimal(-7.00/100)
+    lgla_output = round(lgla,2)
+    lglb_output = round(lglb,2)
+    lgl_total = lgla_output + lglb_output
+    lgla_total = data.A_amount + lgla_output
+    lglb_total = data.B_amount + lglb_output
+    lgl_end_total = lgla_total + lglb_total 
+
+    #TABLE OUTPUT HIGHEST POSSIBLE
+    hgla = data.A_amount * Decimal(96.90/100)
+    hglb = data.B_amount * Decimal(13/100)
+    hgla_output = round(hgla,2)
+    hglb_output = round(hglb,2)
+    hgl_total = hgla_output + hglb_output
+    hgla_total = data.A_amount + hgla_output
+    hglb_total = data.B_amount + hglb_output
+    hgl_end_total = hgla_total + hglb_total 
+
+    #OUTCOME
+    percent_a = random.uniform(-49.90, 96.90)
+    percent_b = random.uniform(-7.00, 13)
+    percent_a_output = round(percent_a,2)
+    percent_b_output = round(percent_b,2)
+    aa_output = data.A_amount * Decimal(percent_a_output/100)
+    bb_output = data.B_amount * Decimal(percent_b_output/100)
+    a_output = round(aa_output,2)
+    b_output = round(bb_output,2)
+    
+    context = {
+        'data': data,
+        'lgla_output':lgla_output,
+        'lglb_output':lglb_output,
+        'lgl_total':lgl_total,
+        'lgla_total':lgla_total,
+        'lglb_total':lglb_total,
+        'lgl_end_total':lgl_end_total,
+        'hgla_output':hgla_output,
+        'hglb_output':hglb_output,
+        'hgl_total':hgl_total,
+        'hgla_total':hgla_total,
+        'hglb_total':hglb_total,
+        'hgl_end_total':hgl_end_total,
+    }
+    return render(request, 'main/table_data.html', context)
 
 def page12(request):
     data = Participant.objects.latest('id')
