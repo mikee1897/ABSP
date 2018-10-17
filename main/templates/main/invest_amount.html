@@ -18,19 +18,19 @@
 
                 <div class="ui big blue label">
                     <i class="large money bill green alternate icon"></i>
-                    >= 1000
+                    <= 1000
                 </div>
                 <div class="ui inverted center aligned segment">
-                        <audio width="2000px;" controls="controls" src="{% static 'audio/' %}{{audio_10_9}}" cont></audio>
+                    <audio width="2000px;" controls="controls" src="{% static 'audio/' %}{{audio_10_2}}"></audio>
                 </div>
                 <div class="four column fields" style="margin-top:20px;">
                     <div class="field"></div>
                     <div class="field">
-                        <label for="">A</label>
+                        <label for="">3</label>
                         {{form.A_amount}}
                     </div>
                     <div class="field">
-                        <label for="">B</label>
+                        <label for="">4</label>
                         {{form.B_amount}}
                     </div>
                     <div class="field"></div>
@@ -54,7 +54,12 @@
             $('#B_amount').val(res);
             
             if ($(this).val() > 1000){
-                alert("Amount >= 1000");
+                alert("Amount <= 1000");
+                $(this).val('0');
+                $('#B_amount').val(0);
+            }
+			 if ($(this).val() < 0){
+                alert("Invalid Negative Value");
                 $(this).val('0');
                 $('#B_amount').val(0);
             }

@@ -8,12 +8,12 @@
                 {% csrf_token %}
                 <label for="" class="ui large blue label">3.</label>
                 <div class="ui inverted center aligned segment">
-                        <audio width="2000px;" controls="controls" src="{% static 'audio/' %}{{audio_5}}" cont></audio>
+                        <audio width="2000px;" controls="controls" src="{% static 'audio/' %}{{audio_5}}"></audio>
                 </div>
                 <div class="three column fields">
                     <div class="field"></div>
                     <div class="fourteen wide field">
-                        <label for="">Input Answer Here</label>
+                       
                         {{form.age}}
                     </div>
                     <div class="field"></div>
@@ -30,8 +30,16 @@
 
 </div>
 
-{% endblock %}
+<script>
+    $( document ).ready(function() {
 
-{% block script %}
+        $("#age").on("change paste keyup", function() {
+            if ($(this).val() < 0){
+                alert("Age Invalid");
+                $(this).val('0');
+            }
+        });
+    });
+</script>
 
 {% endblock %}

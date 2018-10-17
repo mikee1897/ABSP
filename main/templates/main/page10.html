@@ -2,20 +2,13 @@
 
 {% block content %}{% load static %}
 <div class="ui two column centered grid">
-    <div class="ten wide column">
+    <div class="nine wide column">
         <div class="ui inverted segment">
             <form class="ui center aligned inverted form" method="POST">
                 {% csrf_token %}
                 <label for="" class="ui large blue label">8.</label>
-                <div class="two column fields" style="margin-top:20px;">
-                    <div class="field">
-                        <span>1.</span>
-                        <audio width="2000px;" controls="controls" src="{% static 'audio/' %}{{audio_10_1}}" cont></audio>
-                    </div>
-                    <div class="field">
-                        <span>2.</span>
-                        <audio width="2000px;" controls="controls" src="{% static 'audio/' %}{{audio_10_2}}" cont></audio>
-                    </div>
+                <div class="ui inverted center aligned segment">
+                    <audio width="2000px;" controls="controls" src="{% static 'audio/' %}{{audio_10_1}}"></audio>
                 </div>
                 <table class="ui basic table">
                     <tr>

@@ -1,0 +1,83 @@
+{% extends 'main/global-ui/header.html' %}
+
+{% block content %}
+<h2>{{title}}</h2>
+{% if messages %}
+    {% for message in messages %}
+        <div class="ui green message"> {{ message }}</div>
+    {% endfor %}
+{% endif %}
+<div class="ui two column centered grid">
+    <div class="column">
+        <table class="ui two column celled table">
+            <thead>
+                <tr>
+                    <th>PARTICIPANTS</th>
+                    <td>{{participants}}</td>
+                </tr>
+                <tr>
+                    <th>SS</th>
+                    <td>{{ss_count}}</td>
+                </tr>
+                <tr>
+                    <th>WW</th>
+                    <td>{{ww_count}}</td>
+                </tr>
+                <tr>
+                    <th>SW</th>
+                    <td>{{sw_count}}</td>
+                </tr>
+                <tr>
+                    <th>WS</th>
+                    <td>{{ws_count}}</td>
+                </tr>
+            </thead>
+        </table>
+
+        <table class="ui two column celled table">
+                <thead>
+                    <tr>
+                        <th>SS1</th>
+                        <td>{{ss_1}}</td>
+                    </tr>
+                    <tr>
+                        <th>SS2</th>
+                        <td>{{ss_2}}</td>
+                    </tr>
+                    <tr>
+                        <th>WW1</th>
+                        <td>{{ww_1}}</td>
+                    </tr>
+                    <tr>
+                        <th>WW2</th>
+                        <td>{{ww_2}}</td>
+                    </tr>
+                    <tr>
+                        <th>SW1</th>
+                        <td>{{sw_1}}</td>
+                    </tr>
+                    <tr>
+                        <th>SW2</th>
+                        <td>{{sw_2}}</td>
+                    </tr>
+                    <tr>
+                        <th>WS1</th>
+                        <td>{{ws_1}}</td>
+                    </tr>
+                    <tr>
+                        <th>WS2</th>
+                        <td>{{ws_2}}</td>
+                    </tr>
+                </thead>
+            </table>
+
+            <form action="" method="POST"> {% csrf_token %}
+                <div class="ui basic center aligned segment">
+                    <button class="ui green button" type="submit">Save</button>
+                </div>
+            </form>
+           
+    </div>
+</div>
+
+{% endblock %}

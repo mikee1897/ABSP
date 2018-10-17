@@ -46,15 +46,24 @@ class IDForm(forms.ModelForm):
     class Meta:
         model = Participant
         fields = ('idnumber',)
-        widgets = {
-            'idnumber': forms.NumberInput(attrs={'name':'idnumber', 'id':'idnumber','type':'number'})
-        }
+
+    IDNUMBER = (
+        ('112', '112'),
+        ('113', '113'),
+        ('114', '114'),
+        ('115', '115'),
+        ('116', '116'),
+        ('117', '117'),
+        ('118', '118'),
+    )
+    idnumber = forms.CharField(widget = forms.Select(choices=IDNUMBER))
 
 class AgeForm(forms.ModelForm):
+    age = forms.CharField(widget = forms.NumberInput(attrs={'name':'age', 'id':'age', 'type':'number'}))
     class Meta:
         model = Participant
         fields = ('age',)
-    
+	
 class GenderForm(forms.ModelForm):
     class Meta:
         model = Participant
@@ -71,6 +80,7 @@ class EmailForm(forms.ModelForm):
         fields = ('email',)
    
 class MobileForm(forms.ModelForm):
+    mobile = forms.CharField(widget = forms.NumberInput(attrs={'name':'mobile', 'id':'mobile', 'type':'number'}))
     class Meta:
         model = Participant
         fields = ('mobile',)
