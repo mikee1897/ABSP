@@ -42,21 +42,21 @@ class NameForm(forms.ModelForm):
         model = Participant
         fields = ('name',)
 
-class IDForm(forms.ModelForm):
-    class Meta:
-        model = Participant
-        fields = ('idnumber',)
+# class IDForm(forms.ModelForm):
+#     class Meta:
+#         model = Participant
+#         fields = ('idnumber',)
 
-    IDNUMBER = (
-        ('112', '112'),
-        ('113', '113'),
-        ('114', '114'),
-        ('115', '115'),
-        ('116', '116'),
-        ('117', '117'),
-        ('118', '118'),
-    )
-    idnumber = forms.CharField(widget = forms.Select(choices=IDNUMBER))
+#     IDNUMBER = (
+#         ('112', '112'),
+#         ('113', '113'),
+#         ('114', '114'),
+#         ('115', '115'),
+#         ('116', '116'),
+#         ('117', '117'),
+#         ('118', '118'),
+#     )
+#     idnumber = forms.CharField(widget = forms.Select(choices=IDNUMBER))
 
 class AgeForm(forms.ModelForm):
     age = forms.CharField(widget = forms.NumberInput(attrs={'name':'age', 'id':'age', 'type':'number'}))
@@ -74,16 +74,16 @@ class CollegeForm(forms.ModelForm):
         model = Participant
         fields = ('college',)
 
-class EmailForm(forms.ModelForm):
-    class Meta:
-        model = Participant
-        fields = ('email',)
+# class EmailForm(forms.ModelForm):
+#     class Meta:
+#         model = Participant
+#         fields = ('email',)
    
-class MobileForm(forms.ModelForm):
-    mobile = forms.CharField(widget = forms.NumberInput(attrs={'name':'mobile', 'id':'mobile', 'type':'number'}))
-    class Meta:
-        model = Participant
-        fields = ('mobile',)
+# class MobileForm(forms.ModelForm):
+#     mobile = forms.CharField(widget = forms.NumberInput(attrs={'name':'mobile', 'id':'mobile', 'type':'number'}))
+#     class Meta:
+#         model = Participant
+#         fields = ('mobile',)
 
 class InvestAmountForm(forms.ModelForm):
     class Meta:

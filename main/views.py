@@ -8,11 +8,20 @@ import random
 from decimal import Decimal
 
 from main.models import Participant
-from main.forms import TermsForm, LanguageForm, NameForm, IDForm, AgeForm, GenderForm, CollegeForm
-from main.forms import EmailForm, MobileForm, InvestAmountForm, OutcomeForm
+from main.forms import TermsForm, LanguageForm, NameForm, AgeForm, GenderForm, CollegeForm
+from main.forms import InvestAmountForm, OutcomeForm
 
 from .models import Participant, Tally
 # Create your views here.
+
+def participants(request):
+    data = Participant.objects.all().order_by('-id') 
+        
+    context = {
+       'title': "Participants",
+       'data':data,
+    }
+    return render(request, 'main/participants.html', context)
 
 def index(request):
     participants = Participant.objects.all().count()
@@ -173,37 +182,37 @@ def page3(request):
     return render(request, 'main/page3.html', context)
 
 
-def page4(request):
-    data = Participant.objects.latest('id')
-    form = IDForm(request.POST)
+# def page4(request):
+#     data = Participant.objects.latest('id')
+#     form = IDForm(request.POST)
 
-    audio_4 = ""
-    if data.language_used == "English":
-        audio_4 = "ENG/ENG4.mp3"
-    elif data.language_used == "Tagalog":
-        audio_4 = "TAG/TAG4.mp3"
-    elif data.language_used == "Korean":
-        audio_4 = "KOR/KOR4.mp3"
-    elif data.language_used == "Japanese":
-        audio_4 = "JAP/JAP4.mp3"
-    elif data.language_used == "Mandarin":
-        audio_4 = "MND/MND4.mp3"
-    elif data.language_used == "Hokkien":
-        audio_4 = "HOK/HOK4.mp3"
-    else:
-        audio_4 = "CEB/CEB4.mp3"
+#     audio_4 = ""
+#     if data.language_used == "English":
+#         audio_4 = "ENG/ENG4.mp3"
+#     elif data.language_used == "Tagalog":
+#         audio_4 = "TAG/TAG4.mp3"
+#     elif data.language_used == "Korean":
+#         audio_4 = "KOR/KOR4.mp3"
+#     elif data.language_used == "Japanese":
+#         audio_4 = "JAP/JAP4.mp3"
+#     elif data.language_used == "Mandarin":
+#         audio_4 = "MND/MND4.mp3"
+#     elif data.language_used == "Hokkien":
+#         audio_4 = "HOK/HOK4.mp3"
+#     else:
+#         audio_4 = "CEB/CEB4.mp3"
 
-    if request.method == 'POST':
-        if form.is_valid():
-            data.idnumber = request.POST.get('idnumber')
-            data.save()
-            return HttpResponseRedirect('../page5')
+#     if request.method == 'POST':
+#         if form.is_valid():
+#             data.idnumber = request.POST.get('idnumber')
+#             data.save()
+#             return HttpResponseRedirect('../page5')
            
-    context = {
-        'form': form,
-        'audio_4': audio_4 
-    }
-    return render(request, 'main/page4.html', context)
+#     context = {
+#         'form': form,
+#         'audio_4': audio_4 
+#     }
+#     return render(request, 'main/page4.html', context)
 
 def page5(request):
     data = Participant.objects.latest('id')
@@ -228,7 +237,7 @@ def page5(request):
         if form.is_valid():
             data.age = request.POST.get('age')
             data.save()
-            return HttpResponseRedirect('../page6')
+            return HttpResponseRedirect('../page5')
            
     context = {
         'form': form,
@@ -260,7 +269,7 @@ def page6(request):
         if form.is_valid():
             data.gender = request.POST.get('gender')
             data.save()
-            return HttpResponseRedirect('../page7')
+            return HttpResponseRedirect('../page6')
            
     context = {
         'form': form,
@@ -291,7 +300,7 @@ def page7(request):
         if form.is_valid():
             data.college = request.POST.get('college')
             data.save()
-            return HttpResponseRedirect('../page8')
+            return HttpResponseRedirect('../page7')
            
     context = {
         'form': form,
@@ -299,68 +308,68 @@ def page7(request):
     }
     return render(request, 'main/page7.html', context)
 
-def page8(request):
-    data = Participant.objects.latest('id')
-    form = EmailForm(request.POST)
-    audio_8 = ""
-    if data.language_used == "English":
-        audio_8 = "ENG/ENG8.mp3"
-    elif data.language_used == "Tagalog":
-        audio_8 = "TAG/TAG8.mp3"
-    elif data.language_used == "Korean":
-        audio_8 = "KOR/KOR8.mp3"
-    elif data.language_used == "Japanese":
-        audio_8 = "JAP/JAP8.mp3"
-    elif data.language_used == "Mandarin":
-        audio_8 = "MND/MND8.mp3"
-    elif data.language_used == "Hokkien":
-        audio_8 = "HOK/HOK8.mp3"
-    else:
-        audio_8 = "CEB/CEB8.mp3"
+# def page8(request):
+#     data = Participant.objects.latest('id')
+#     form = EmailForm(request.POST)
+#     audio_8 = ""
+#     if data.language_used == "English":
+#         audio_8 = "ENG/ENG8.mp3"
+#     elif data.language_used == "Tagalog":
+#         audio_8 = "TAG/TAG8.mp3"
+#     elif data.language_used == "Korean":
+#         audio_8 = "KOR/KOR8.mp3"
+#     elif data.language_used == "Japanese":
+#         audio_8 = "JAP/JAP8.mp3"
+#     elif data.language_used == "Mandarin":
+#         audio_8 = "MND/MND8.mp3"
+#     elif data.language_used == "Hokkien":
+#         audio_8 = "HOK/HOK8.mp3"
+#     else:
+#         audio_8 = "CEB/CEB8.mp3"
 
-    if request.method == 'POST':
-        if form.is_valid():
-            data.email = request.POST.get('email')
-            data.save()
-            return HttpResponseRedirect('../page9')
+#     if request.method == 'POST':
+#         if form.is_valid():
+#             data.email = request.POST.get('email')
+#             data.save()
+#             return HttpResponseRedirect('../page9')
            
-    context = {
-        'form': form,
-        'audio_8': audio_8 
-    }
-    return render(request, 'main/page8.html', context)
+#     context = {
+#         'form': form,
+#         'audio_8': audio_8 
+#     }
+#     return render(request, 'main/page8.html', context)
 
-def page9(request):
-    data = Participant.objects.latest('id')
-    form = MobileForm(request.POST)
-    audio_9 = ""
-    if data.language_used == "English":
-        audio_9 = "ENG/ENG9.mp3"
-    elif data.language_used == "Tagalog":
-        audio_9 = "TAG/TAG9.mp3"
-    elif data.language_used == "Korean":
-        audio_9 = "KOR/KOR9.mp3"
-    elif data.language_used == "Japanese":
-        audio_9 = "JAP/JAP9.mp3"
-    elif data.language_used == "Mandarin":
-        audio_9 = "MND/MND9.mp3"
-    elif data.language_used == "Hokkien":
-        audio_9 = "HOK/HOK9.mp3"
-    else:
-        audio_9 = "CEB/CEB9.mp3"
+# def page9(request):
+#     data = Participant.objects.latest('id')
+#     form = MobileForm(request.POST)
+#     audio_9 = ""
+#     if data.language_used == "English":
+#         audio_9 = "ENG/ENG9.mp3"
+#     elif data.language_used == "Tagalog":
+#         audio_9 = "TAG/TAG9.mp3"
+#     elif data.language_used == "Korean":
+#         audio_9 = "KOR/KOR9.mp3"
+#     elif data.language_used == "Japanese":
+#         audio_9 = "JAP/JAP9.mp3"
+#     elif data.language_used == "Mandarin":
+#         audio_9 = "MND/MND9.mp3"
+#     elif data.language_used == "Hokkien":
+#         audio_9 = "HOK/HOK9.mp3"
+#     else:
+#         audio_9 = "CEB/CEB9.mp3"
 
 
-    if request.method == 'POST':
-        if form.is_valid():
-            data.mobile = request.POST.get('mobile')
-            data.save()
-            return HttpResponseRedirect('../page10')
+#     if request.method == 'POST':
+#         if form.is_valid():
+#             data.mobile = request.POST.get('mobile')
+#             data.save()
+#             return HttpResponseRedirect('../page10')
            
-    context = {
-        'form': form,
-        'audio_9': audio_9
-    }
-    return render(request, 'main/page9.html', context)
+#     context = {
+#         'form': form,
+#         'audio_9': audio_9
+#     }
+#     return render(request, 'main/page9.html', context)
 
 def page10(request):
     data = Participant.objects.latest('id')
@@ -389,7 +398,7 @@ def withdraw(request):
     data = Participant.objects.latest('id')
     data.withdraw_invest = 1
     data.save()
-    return HttpResponseRedirect('../page13')
+    return HttpResponseRedirect('../page10')
 
 def invest(request):
     data = Participant.objects.latest('id')
@@ -432,32 +441,19 @@ def page11(request):
     data = Participant.objects.latest('id')
     form = OutcomeForm(request.POST or None)
 
-    #OUTCOME
-    percent_a = random.uniform(-49.90, 96.90)
-    percent_b = random.uniform(-7.00, 13)
-    percent_a_output = round(percent_a,2)
-    percent_b_output = round(percent_b,2)
-    aa_output = data.A_amount * Decimal(percent_a_output/100)
-    bb_output = data.B_amount * Decimal(percent_b_output/100)
-    a_output = round(aa_output,2)
-    b_output = round(bb_output,2)
-    
     if request.method == 'POST':
         if form.is_valid():
-            data.A_generated_percent = percent_a_output
-            data.B_generated_percent = percent_b_output
-            data.A_gain_loss = a_output
-            data.B_gain_loss = b_output
-            data.save()
-            return HttpResponseRedirect('../page12')
-        else:
-            messages.warning(request, 'Click Buttons to Generate Gain/(Loss)')
+            a_output = request.POST.get('A_gain_loss')
+            b_output = request.POST.get('B_gain_loss')
 
+            data.A_gain_loss = Decimal(a_output)
+            data.B_gain_loss = Decimal(b_output)
+            data.save()
+            return HttpResponseRedirect('../page9')
+        
     context = {
 		'data': data,
         'form': form,
-        'a_output': a_output,
-        'b_output': b_output,
 	}
     return render(request, 'main/page11.html', context)
 
@@ -514,7 +510,7 @@ def table_data(request):
 def page12(request):
     data = Participant.objects.latest('id')
     if request.method == 'POST':
-        return HttpResponseRedirect('../page13')
+        return HttpResponseRedirect('../page10')
     context = {
         'data': data,
     }

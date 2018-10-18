@@ -1,0 +1,45 @@
+{% extends 'main/global-ui/header.html' %}
+
+{% block content %}
+
+<div class = "ui fluid container">
+    <h1>{{title}}</h1>
+    <table id="tabledata" class="ui eight column celled table responsive nowrap" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Treatment</th>
+                <th>Decision</th>
+                <th>A - Amount</th>
+                <th>B - Amount</th>
+                <th>A - Gain/Loss</th>
+                <th>B - Gain/Loss</th>
+                <th>Ecu</th>
+                <th>Payout</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in data %}
+            <tr>
+                <td>{{ data.name }}</td>
+                <td>{{ data.quadrant }}{{ data.treatment }}</td>
+                <td>{{ data.withdraw_invest }}</td>    
+                <td>{{ data.A_amount }}</td>
+                <td>{{ data.B_amount }}</td> 
+                <td>{{ data.A_gain_loss }}</td>
+                <td>{{ data.B_gain_loss }}</td> 
+                <td>{{ data.ecu }}</td>
+                <td style="font-weight:bold;">{{ data.payout }}</td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    
+
+<script type="text/javascript">           
+    $(document).ready(function() {
+        $('#tabledata').DataTable();
+    } );
+</script>
+{% endblock %}

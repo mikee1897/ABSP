@@ -1,14 +1,6 @@
 {% extends 'main/global-ui/header.html' %}
 
 {% block content %}
-{% if messages %}
-    {% for message in messages %}
-    <div class="ui basic segment">
-        <div class="ui red message"> {{ message }}</div>
-    </div>    
-    {% endfor %}
-{% endif %}
-
 <div class="ui two column centered grid">
     <div class="nine wide column">
         <div class="ui inverted segment">
@@ -38,23 +30,45 @@
     </div>
 <script>
     $( document ).ready(function() {
+        // var amin = -49.90;
+        // var amax = 96.90;
+        // var a = Math.floor(Math.random() * (amax - amin + 1)) + amin;
+        // console.log(a)
+        // $( "#a_btn" ).click(function() {
+        //     //$('#A_gain_loss').val(a);
+        //     console.log("a")
+        //     //$('#A_gain_loss').val("{{a_output}}");
+        //     //$('#a_btn').prop('disabled', true);
+        // });
+
+        // $( "#b_btn" ).click(function() {
+        //     $('#B_gain_loss').val("{{b_output}}");
+        //     $('#b_btn').prop('disabled', true);
+        // });
+
+        // $(function(){
+        //     if($('#a_btn').prop('disabled') == true) { 
+        //         alert('disabled'); 
+        //     } 
+        // });
+        var amin = -49.90;
+        var amax = 96.90;
+      
         $( "#a_btn" ).click(function() {
-            $('#A_gain_loss').val("{{a_output}}");
+            var a = (Math.floor(Math.random() * (amax - amin + 1)) + amin).toFixed(2);
+            var aa = ((a/100) * '{{data.A_amount}}').toFixed(2);
+            $('#A_gain_loss').val(aa);
             $('#a_btn').prop('disabled', true);
         });
 
-        $( "#b_btn" ).click(function() {
-            $('#B_gain_loss').val("{{b_output}}");
-            $('#b_btn').prop('disabled', true);
-        });
+        var bmin = -7.00;
+        var bmax = 13.00;
 
-        $(function(){
-            if($('#a_btn').prop('disabled') == true) { 
-                alert('disabled'); 
-            } 
-            // if($('#A_gain_loss').is(":empty")){
-            //     alert("empty")
-            // }
+        $( "#b_btn" ).click(function() {
+            var b = (Math.floor(Math.random() * (amax - amin + 1)) + amin).toFixed(2);
+            var bb = ((b/100) * '{{data.B_amount}}').toFixed(2);
+            $('#B_gain_loss').val(bb);
+            $('#b_btn').prop('disabled', true);
         });
     });
 </script>

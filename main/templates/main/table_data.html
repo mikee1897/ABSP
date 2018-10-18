@@ -76,14 +76,20 @@
 
 <div class="ui two column centered grid">
     <div class="ten wide column " >
-        <div class="ui right aligned basic segment">
-                <a class="ui icon button" href="{% url 'main:invest'%}">
+        <div class="ui grid">
+            <div class="eleven column row">
+              <div class="left floated column">
+                <a class="ui icon green button" href="{% url 'main:invest'%}">
                     <i class="angle double left icon"></i>
                 </a>
+              </div>
+              <div class="right floated column">
                 <a class="ui icon green button" href="{% url 'main:page11'%}">
                     <i class="angle double right icon"></i>
                 </a>
-        </div>
+              </div>
+            </div>
+          </div>
     </div>
 </div>
 {% endblock %}
